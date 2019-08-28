@@ -11,13 +11,16 @@ import com.spring.data.jpa.repository.BookRepository;
 @Service
 public class BookService {
 	
-	private final BookRepository repository ;
+	@Autowired
+	private BookRepository repository ;
+	
+	/*private final BookRepository repository ;
 
 	@Autowired
 	public BookService(final BookRepository repository) {
 		super();
 		this.repository = repository;
-	}
+	}*/
 	
 	public void saveBook(Book book)
 	{

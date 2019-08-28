@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -20,9 +21,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
-@EnableJpaRepositories("com.spring.data.jpa.repository")
 @EnableTransactionManagement
-@ComponentScan("com.spring.data.jpa")
+@ComponentScan(basePackages= {"com.spring.data.jpa.service","com.spring.data.jpa.model"})
+@EnableJpaRepositories(basePackages="com.spring.data.jpa.repository")
 public class DataConfig {
 	
 	@Bean
@@ -32,6 +33,16 @@ public class DataConfig {
 		return builder.setType(EmbeddedDatabaseType.H2).build();
 	}
 	
+	/* @Bean
+	    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+	        
+	        entityManagerFactoryBean.setDataSource(dataSource());
+	        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+	        entityManagerFactoryBean.setPackagesToScan(PROPERTY_PACKAGES_TO_SCAN);
+
+	 }
+	*/
 	@Bean
 	public EntityManagerFactory entityManagerFactory() {
 		
@@ -44,7 +55,7 @@ public class DataConfig {
 		
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan("com.spring.data.jpa");
+		factoryBean.setPackagesToScan("com.spring.data.jpa.model");
 		factoryBean.setJpaVendorAdapter(vendorAdapter);
 		factoryBean.setJpaProperties(jpaProperties);
 		factoryBean.afterPropertiesSet();
@@ -52,12 +63,23 @@ public class DataConfig {
 		
 	}
 	
-	@Bean
+	/*@Bean
 	public PlatformTransactionManager  transactionManager()
 	{
 		JpaTransactionManager txManager = new JpaTransactionManager();
 		txManager.setEntityManagerFactory(entityManagerFactory());
 		return txManager;
-	}
+	}*/
+	
+	 @Bean
+	    public JpaTransactionManager transactionManager() {
+	        JpaTransactionManager transactionManager = new JpaTransactionManager();
+
+	        transactionManager.setEntityManagerFactory(entityManagerFactory());
+
+	        return transactionManager;
+	    }
+	 
+	
 
 }
