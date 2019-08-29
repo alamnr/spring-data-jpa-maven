@@ -25,8 +25,10 @@ import com.spring.data.jpa.repository.BookRepository;
 
 @RunWith(SpringRunner.class)
 //@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = { DataConfig.class},loader = AnnotationConfigContextLoader.class )
-@ContextConfiguration(classes = { PersistenceContext.class} )
+///@ContextConfiguration(classes = { DataConfig.class} )
+//@ContextConfiguration(classes = { PersistenceContext.class} )
+//@ContextConfiguration(locations= {"classpath:PersistenceContext.xml"})
+@ContextConfiguration(locations= {"classpath:exampleApplicationContext-persistence.xml"})
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
     DirtiesContextTestExecutionListener.class,
     TransactionalTestExecutionListener.class/*,
