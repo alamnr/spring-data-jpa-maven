@@ -1,0 +1,5 @@
+<dataset>
+    <book bookId="1" pageCount="125" title="Foo" VERSION="0"/>
+    <book bookId="2" pageCount="100" title="Bar" VERSION="0"/>
+</dataset>
+

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="BOOK")
@@ -25,6 +26,9 @@ public class Book {
 	
 	private BigDecimal price;
 	
+	
+	@Version
+	private long version;
 	
 
 	public Book() {
@@ -101,10 +105,22 @@ public class Book {
 
 
 
+	public long getVersion() {
+		return version;
+	}
+
+
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", title=" + title + ", publishDate=" + publishDate + ", pageCount="
-				+ pageCount + ", price=" + price + "]";
+				+ pageCount + ", price=" + price + ", version=" + version + "]";
 	}
 	
 	

@@ -231,7 +231,8 @@
 		<dependency>
 			<groupId>com.github.springtestdbunit</groupId>
 			<artifactId>spring-test-dbunit</artifactId>
-			<version>1.0.0</version>
+			<!-- <version>1.0.0</version> -->
+			<version>LATEST</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
