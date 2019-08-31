@@ -10,6 +10,16 @@ import com.spring.data.jpa.model.Book;
 
 //@Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-	
+		
 	List<Book> findByTitle(String title);
+	
+	List<Book> findByTitleLike(String title);
+	
+	List<Book> findByTitleContaining(String title);
+	
+	List<Book> findByTitleStartingWith(String title);
+	
+	List<Book> findByTitleEndingWith(String title);
+	
+	List<Book> findByTitleIgnoreCase(String title); 
 }

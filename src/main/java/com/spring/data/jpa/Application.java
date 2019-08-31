@@ -15,8 +15,8 @@ import com.spring.data.jpa.config.DataConfig;
 import com.spring.data.jpa.config.PersistenceContext;
 import com.spring.data.jpa.model.Book;
 import com.spring.data.jpa.repository.BookRepository;
-import com.spring.data.jpa.repository.CustomRepository;
-import com.spring.data.jpa.repository.CustomRepositoryImpl;
+import com.spring.data.jpa.repository.BaseReadOnlyRepository;
+import com.spring.data.jpa.repository.BookReadOnlyRepository;
 import com.spring.data.jpa.service.BookService;
 import com.spring.data.jpa.util.BookUtil;
 
@@ -40,10 +40,10 @@ public class Application {
 		 */
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("PersistenceContext.xml");
-		BookRepository repository = context.getBean(BookRepository.class);
+		BookRepository bookRepository = context.getBean(BookRepository.class);
 
 		List<Book> books = BookUtil.create(7);
-		repository.saveAll(books);
+		bookRepository.saveAll(books);
 		
 	
 
@@ -92,6 +92,9 @@ public class Application {
 		System.out.println(customRepository.findOne(1L));
 		
 		customRepository.findAll().iterator().forEachRemaining(obj->System.out.println(obj));*/
+		
+		bookRepository.findByTitle("1984").stream().forEach(obj->System.out.println(obj));
+		bookRepository.findByTitleIgnoreCase("ulysses").stream().forEach(obj->System.out.println(obj));
 	}
 		
 }

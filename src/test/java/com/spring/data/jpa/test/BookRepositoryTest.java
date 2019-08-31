@@ -47,7 +47,7 @@ public class BookRepositoryTest {
 		
 		repository.save(new Book("Java"));
 		
-		List<Book>  books = repository.findByTitle("Java");
+		List<Book>  books = repository.findByTitle ("Java");
 		
 		//List<Book>  books = repository.findAll();
 		
