@@ -16,12 +16,12 @@ import org.springframework.data.jpa.repository.Query;
 
 @Entity
 @Table(name="BOOK")
-@NamedQueries({
+/*@NamedQueries({
 	@NamedQuery(name="Book.queryJpql1",query="select b from Book b"),
 	@NamedQuery(name="Book.queryJpqlOrdinalParam", query="select b from Book b where b.price = ?1"),
 	@NamedQuery(name="Book.queryJpqlNamedParam",query="select b from Book b where b.title = :title")
 
-})
+})*/
 public class Book {
 	
 	@Id

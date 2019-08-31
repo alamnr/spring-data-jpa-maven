@@ -12,6 +12,8 @@ import org.apache.log4j.helpers.BoundedFIFO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import com.spring.data.jpa.config.DataConfig;
 import com.spring.data.jpa.config.PersistenceContext;
@@ -46,73 +48,89 @@ public class Application {
 
 		List<Book> books = BookUtil.create(7);
 		bookRepository.saveAll(books);
-		
-	
 
-		/*Optional<Book> optional = repository.findById(1L);
-		Book myBook = null ;
-		if (optional.isPresent()) {
-			System.out.println(optional.get());
-			myBook = optional.get();
-		}
-		
-		//myBook.setBookId(1000L);
+		/*
+		 * Optional<Book> optional = repository.findById(1L); Book myBook = null ; if
+		 * (optional.isPresent()) { System.out.println(optional.get()); myBook =
+		 * optional.get(); }
+		 * 
+		 * //myBook.setBookId(1000L);
+		 * 
+		 * myBook.setTitle("War and Peace");
+		 * 
+		 * repository.saveAndFlush(myBook); //
+		 * repository.findAll().stream().forEach(obj->System.out.println(obj));
+		 * 
+		 * optional = repository.findById(1L);
+		 * 
+		 * if (optional.isPresent()) { System.out.println(optional.get()); }
+		 * 
+		 * repository.findAll().stream().forEach(obj->System.out.println(obj));
+		 * 
+		 * optional = repository.findById(1000L);
+		 * 
+		 * if (optional.isPresent()) { System.out.println(optional.get()); }
+		 */
 
-		myBook.setTitle("War and Peace");
+		// repository.deleteById(1L);
+		// repository.delete(repository.findById(1L).get());
+		// repository.deleteAll(repository.findAllById((Arrays.asList(1L,2L,3L))));
+		// repository.deleteInBatch(repository.findAllById((Arrays.asList(1L,2L,3L))));
+		// repository.deleteAll();
+		// repository.deleteAllInBatch();
 
-		repository.saveAndFlush(myBook);
 		// repository.findAll().stream().forEach(obj->System.out.println(obj));
 
-		optional = repository.findById(1L);
+		/*
+		 * CustomRepositoryImpl customRepository =
+		 * context.getBean(CustomRepositoryImpl.class);
+		 * 
+		 * customRepository.save(books);
+		 * 
+		 * System.out.println(customRepository.findOne(1L));
+		 * 
+		 * customRepository.findAll().iterator().forEachRemaining(obj->System.out.
+		 * println(obj));
+		 */
 
-		if (optional.isPresent()) {
-			System.out.println(optional.get());
-		}
-		
-		repository.findAll().stream().forEach(obj->System.out.println(obj));
-		
-		optional = repository.findById(1000L);
+		/*
+		 * bookRepository.findByTitle("1984").stream().forEach(obj->System.out.println(
+		 * obj));
+		 * bookRepository.findByTitleIgnoreCase("ulysses").stream().forEach(obj->System.
+		 * out.println(obj));
+		 * 
+		 * Date date1= new SimpleDateFormat("mm/dd/yyyy").parse("10/22/1995"); Date
+		 * date2= new SimpleDateFormat("mm/dd/yyyy").parse("10/22/1997");
+		 * bookRepository.findBypublishDateBetween(date1,
+		 * date2).stream().forEach(obj->System.out.println(obj));
+		 */
+		/*
+		 * bookRepository.findTopByOrderByPageCountDesc().stream().forEach(obj->System.
+		 * out.println(obj));
+		 * 
+		 * bookRepository.findFirstByOrderByPageCountAsc().stream().forEach(obj->System.
+		 * out.println(obj));
+		 * 
+		 * bookRepository.findTop5ByOrderByPriceDesc().stream().forEach(obj->System.out.
+		 * println(obj));
+		 */
 
-		if (optional.isPresent()) {
-			System.out.println(optional.get());
-		}
-*/
-		
-		//repository.deleteById(1L);
-		//repository.delete(repository.findById(1L).get());
-		//repository.deleteAll(repository.findAllById((Arrays.asList(1L,2L,3L))));
-		//repository.deleteInBatch(repository.findAllById((Arrays.asList(1L,2L,3L))));
-		//repository.deleteAll();
-		//repository.deleteAllInBatch();
-		
-		//repository.findAll().stream().forEach(obj->System.out.println(obj));
-		
-		/*CustomRepositoryImpl customRepository = context.getBean(CustomRepositoryImpl.class);
-		
-		customRepository.save(books);
-		
-		System.out.println(customRepository.findOne(1L));
-		
-		customRepository.findAll().iterator().forEachRemaining(obj->System.out.println(obj));*/
-		
-		/*bookRepository.findByTitle("1984").stream().forEach(obj->System.out.println(obj));
-		bookRepository.findByTitleIgnoreCase("ulysses").stream().forEach(obj->System.out.println(obj));
-		
-		Date date1= new SimpleDateFormat("mm/dd/yyyy").parse("10/22/1995");
-		Date date2= new SimpleDateFormat("mm/dd/yyyy").parse("10/22/1997");
-		bookRepository.findBypublishDateBetween(date1, date2).stream().forEach(obj->System.out.println(obj));
-		*/
-		/*bookRepository.findTopByOrderByPageCountDesc().stream().forEach(obj->System.out.println(obj));
-		
-		bookRepository.findFirstByOrderByPageCountAsc().stream().forEach(obj->System.out.println(obj));
-		
-		bookRepository.findTop5ByOrderByPriceDesc().stream().forEach(obj->System.out.println(obj));*/
-		
-		//bookRepository.queryJpql1().stream().forEach(obj-> System.out.println(obj));
-		
-		bookRepository.queryJpqlOrdinalParam(new BigDecimal(15)).stream().forEach(obj-> System.out.println(obj));
-		
-		//bookRepository.queryJpqlNamedParam("1984").stream().forEach(obj-> System.out.println(obj));
+		// bookRepository.queryJpql1().stream().forEach(obj-> System.out.println(obj));
+
+		// bookRepository.queryJpqlOrdinalParam(new
+		// BigDecimal(15)).stream().forEach(obj-> System.out.println(obj));
+
+		// bookRepository.queryJpqlNamedParam("1984").stream().forEach(obj->
+		// System.out.println(obj));
+
+		// bookRepository.findAll(new PageRequest(2,
+		// 3)).stream().forEach(obj->System.out.println(obj));
+
+		// bookRepository.findAll(new
+		// Sort(Sort.Direction.ASC,"pageCount")).stream().forEach(obj->System.out.println(obj));
+
+		bookRepository.findAll(new Sort(Sort.Direction.DESC, "price").and(new Sort(Sort.Direction.ASC, "title")))
+				.stream().forEach(obj -> System.out.println(obj));
 	}
-		
+
 }
