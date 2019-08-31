@@ -102,11 +102,17 @@ public class Application {
 		Date date2= new SimpleDateFormat("mm/dd/yyyy").parse("10/22/1997");
 		bookRepository.findBypublishDateBetween(date1, date2).stream().forEach(obj->System.out.println(obj));
 		*/
-		bookRepository.findTopByOrderByPageCountDesc().stream().forEach(obj->System.out.println(obj));
+		/*bookRepository.findTopByOrderByPageCountDesc().stream().forEach(obj->System.out.println(obj));
 		
 		bookRepository.findFirstByOrderByPageCountAsc().stream().forEach(obj->System.out.println(obj));
 		
-		bookRepository.findTop5ByOrderByPriceDesc().stream().forEach(obj->System.out.println(obj));
+		bookRepository.findTop5ByOrderByPriceDesc().stream().forEach(obj->System.out.println(obj));*/
+		
+		//bookRepository.queryJpql1().stream().forEach(obj-> System.out.println(obj));
+		
+		//bookRepository.queryJpqlOrdinalParam(new BigDecimal(15)).stream().forEach(obj-> System.out.println(obj));
+		
+		bookRepository.queryJpqlNamedParam("1984").stream().forEach(obj-> System.out.println(obj));
 	}
 		
 }
