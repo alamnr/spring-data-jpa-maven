@@ -19,7 +19,8 @@ import com.spring.data.jpa.config.DataConfig;
 import com.spring.data.jpa.config.PersistenceContext;
 import com.spring.data.jpa.model.Book;
 import com.spring.data.jpa.repository.BookRepository;
-import com.spring.data.jpa.repository.BaseReadOnlyRepository;
+import com.spring.data.jpa.repository.CustomRepository;
+import com.spring.data.jpa.repository.ReadOnlyRepository;
 import com.spring.data.jpa.repository.BookReadOnlyRepository;
 import com.spring.data.jpa.service.BookService;
 import com.spring.data.jpa.util.BookUtil;
@@ -129,8 +130,14 @@ public class Application {
 		// bookRepository.findAll(new
 		// Sort(Sort.Direction.ASC,"pageCount")).stream().forEach(obj->System.out.println(obj));
 
-		bookRepository.findAll(new Sort(Sort.Direction.DESC, "price").and(new Sort(Sort.Direction.ASC, "title")))
-				.stream().forEach(obj -> System.out.println(obj));
+		/*bookRepository.findAll(new Sort(Sort.Direction.DESC, "price").and(new Sort(Sort.Direction.ASC, "title")))
+				.stream().forEach(obj -> System.out.println(obj));*/
+		
+		CustomRepository customRepository = context.getBean(CustomRepository.class);
+		
+		customRepository.saveAndLog(BookUtil.create());
+		
+		System.out.println(customRepository.findAll().size());
 	}
 
 }

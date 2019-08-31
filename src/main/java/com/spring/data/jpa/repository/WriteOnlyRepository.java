@@ -6,7 +6,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
 @NoRepositoryBean
-public interface BaseWriteOnlyRepository<T, ID extends Serializable> extends Repository<T, ID> {
+public interface WriteOnlyRepository<T, ID extends Serializable> extends Repository<T, ID> {
 	/**
 	 * Saves all given entities.
 	 * 
