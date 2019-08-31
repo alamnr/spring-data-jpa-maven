@@ -1,5 +1,6 @@
 package com.spring.data.jpa.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,15 +12,63 @@ import com.spring.data.jpa.model.Book;
 //@Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 		
-	List<Book> findByTitle(String title);
+	/*String operator derived query*/
+	public List<Book> findByTitle(String title);
 	
-	List<Book> findByTitleLike(String title);
+	public List<Book> findByTitleLike(String title);
 	
-	List<Book> findByTitleContaining(String title);
+	public List<Book> findByTitleContaining(String title);
 	
-	List<Book> findByTitleStartingWith(String title);
+	public List<Book> findByTitleStartingWith(String title);
 	
-	List<Book> findByTitleEndingWith(String title);
+	public List<Book> findByTitleEndingWith(String title);
 	
-	List<Book> findByTitleIgnoreCase(String title); 
+	public List<Book> findByTitleIgnoreCase(String title);
+	
+	/*Relational operator derived query*/
+	
+	public List<Book> findByPageCountEquals(int pageCount);
+	
+	public List<Book> findByPageCountGreaterThan(int pageCount);
+	
+	public List<Book> findByPageCountLessThan(int pageCount);
+	
+	public List<Book> findByPageCountGreaterThanEqual(int pageCount);
+	
+	public List<Book> findByPageCountLessThanEqual(int pageCount);
+	
+	public List<Book> findByPageCountBetween(int min,int max);
+	
+/*	Logical operator derived query*/
+	
+	public List<Book> findByTitleContainingOrTitleContaining(String title1,String title2);
+	
+	public List<Book> findByTitleContainingAndPageCountGreaterThan(String title, int pageCount);
+	
+	public List<Book> findByTitleNot(String title);
+	
+	/*Date comparison*/
+	
+	List<Book> findByPublishDateAfter(Date date);
+	
+	List<Book> findByPublishDateBefore(Date date);
+	
+	List<Book> findBypublishDateBetween(Date date1, Date date2); 
+	
+	/*Order By*/
+	
+	public List <Book> findByTitleContainingOrderByTitleAsc(String title);
+	
+	public List <Book> findByTitleContainingOrderByTitleDesc(String title);
+	
+	/*Limiting Query Result*/
+	
+	public List<Book> findTopByOrderByPageCountDesc();
+	
+	public List<Book> findFirstByOrderByPageCountAsc();
+	
+	public List<Book> findTop5ByOrderByPriceDesc();
+	
+	public List<Book> findTop5ByTitleOrderByPriceAsc(String title);
+	
 }

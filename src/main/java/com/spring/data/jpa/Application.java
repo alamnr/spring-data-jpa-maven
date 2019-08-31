@@ -1,6 +1,8 @@
 package com.spring.data.jpa;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,7 @@ import com.spring.data.jpa.util.BookUtil;
 public class Application {
 
 	@SuppressWarnings("resource")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		// AnnotationConfigApplicationContext context = new
 		// AnnotationConfigApplicationContext(PersistenceContext.class);
 		// ClassPathXmlApplicationContext context = new
@@ -93,8 +95,18 @@ public class Application {
 		
 		customRepository.findAll().iterator().forEachRemaining(obj->System.out.println(obj));*/
 		
-		bookRepository.findByTitle("1984").stream().forEach(obj->System.out.println(obj));
+		/*bookRepository.findByTitle("1984").stream().forEach(obj->System.out.println(obj));
 		bookRepository.findByTitleIgnoreCase("ulysses").stream().forEach(obj->System.out.println(obj));
+		
+		Date date1= new SimpleDateFormat("mm/dd/yyyy").parse("10/22/1995");
+		Date date2= new SimpleDateFormat("mm/dd/yyyy").parse("10/22/1997");
+		bookRepository.findBypublishDateBetween(date1, date2).stream().forEach(obj->System.out.println(obj));
+		*/
+		bookRepository.findTopByOrderByPageCountDesc().stream().forEach(obj->System.out.println(obj));
+		
+		bookRepository.findFirstByOrderByPageCountAsc().stream().forEach(obj->System.out.println(obj));
+		
+		bookRepository.findTop5ByOrderByPriceDesc().stream().forEach(obj->System.out.println(obj));
 	}
 		
 }
