@@ -110,9 +110,9 @@ public class Application {
 		
 		//bookRepository.queryJpql1().stream().forEach(obj-> System.out.println(obj));
 		
-		//bookRepository.queryJpqlOrdinalParam(new BigDecimal(15)).stream().forEach(obj-> System.out.println(obj));
+		bookRepository.queryJpqlOrdinalParam(new BigDecimal(15)).stream().forEach(obj-> System.out.println(obj));
 		
-		bookRepository.queryJpqlNamedParam("1984").stream().forEach(obj-> System.out.println(obj));
+		//bookRepository.queryJpqlNamedParam("1984").stream().forEach(obj-> System.out.println(obj));
 	}
 		
 }

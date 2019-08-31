@@ -7,11 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.springframework.data.jpa.repository.Query;
+
 @Entity
 @Table(name="BOOK")
+@NamedQueries({
+	@NamedQuery(name="Book.queryJpql1",query="select b from Book b"),
+	@NamedQuery(name="Book.queryJpqlOrdinalParam", query="select b from Book b where b.price = ?1"),
+	@NamedQuery(name="Book.queryJpqlNamedParam",query="select b from Book b where b.title = :title")
+
+})
 public class Book {
 	
 	@Id

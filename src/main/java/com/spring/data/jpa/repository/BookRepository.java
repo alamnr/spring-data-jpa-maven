@@ -76,13 +76,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	
 	/*Using @Query annotation for JPQL query*/
 	
-	@Query("select b from Book b")
+	
 	public List<Book> queryJpql1();
 	
-	@Query("select b from Book b where b.price = ?1")
+	
 	public List<Book> queryJpqlOrdinalParam(BigDecimal price);
 	
-	@Query("select b from Book b where b.title = :title")
+	
 	public List<Book> queryJpqlNamedParam(@Param("title")String title);
 	
 }
