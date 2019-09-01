@@ -29,7 +29,7 @@ import java.util.Properties;
 //@ComponentScan(basePackages= {"com.spring.data.jpa"})
 @EnableJpaRepositories(basePackages = "com.spring.data.jpa.repository")
 @PropertySource("classpath:application.properties")
-@EnableJpaAuditing
+@EnableJpaAuditing(auditorAwareRef="auditorProvider")
 public class PersistenceContext {
 
     protected static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
@@ -90,7 +90,7 @@ public class PersistenceContext {
     }
     
     @Bean
-	public AuditorAware<?>  auditorAware()
+	public AuditorAware<?>  auditorProvider()
 	{
 		return new CustomAuditorAware();
 	}

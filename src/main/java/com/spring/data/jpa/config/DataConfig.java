@@ -26,7 +26,7 @@ import com.spring.data.jpa.auditing.CustomAuditorAware;
 @EnableTransactionManagement
 @ComponentScan(basePackages = { "com.spring.data.jpa.service", "com.spring.data.jpa.model" })
 @EnableJpaRepositories(basePackages = "com.spring.data.jpa.repository")
-@EnableJpaAuditing
+@EnableJpaAuditing(auditorAwareRef="auditorProvider")
 public class DataConfig {
 
 	@Bean
@@ -84,7 +84,7 @@ public class DataConfig {
 	}
 	
 	@Bean
-	public AuditorAware<?>  auditorAware()
+	public AuditorAware<?>  auditorProvider()
 	{
 		return new CustomAuditorAware();
 	}
