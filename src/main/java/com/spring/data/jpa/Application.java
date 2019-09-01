@@ -143,10 +143,15 @@ public class Application {
 		
 		/*BaseRepositoryExample baseRepositoryExample  = context.getBean(BaseRepositoryExample.class);
 		baseRepositoryExample.findByIds(2L,7L).stream().forEach(obj->System.out.println(obj));*/
-		bookRepository.findAll().stream().forEach(obj->System.out.println(obj));
+		/*bookRepository.findAll().stream().forEach(obj->System.out.println(obj));
 		BookService service = context.getBean(BookService.class);
-		System.out.println(service.updateTitleOfBook(1L));
+		System.out.println(service.updateTitleOfBook(1L));*/
 		
+		bookRepository.findAll().stream().forEach(obj->System.out.println(obj));
+		System.out.println("<--------------------------------------------------------------------->");
+		System.out.println(bookRepository.setPageCount("%The%", 1000));
+		System.out.println("<--------------------------------------------------------------------->");
+		bookRepository.findAll().stream().forEach(obj->System.out.println(obj));
 	}
 
 }
