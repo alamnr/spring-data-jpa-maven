@@ -37,4 +37,8 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>
+	
+	<bean id="customAuditorAware" class="com.spring.data.jpa.auditing.CustomAuditorAware"/>
+	<jpa:auditing auditor-aware-ref="customAuditorAware"/>
+	
 </beans>

@@ -13,7 +13,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import com.spring.data.jpa.repository.CustomRepository;
+import com.spring.data.jpa.repository.custom.CustomRepository;
 import com.spring.data.jpa.util.BookUtil;
 
 @RunWith(SpringRunner.class)

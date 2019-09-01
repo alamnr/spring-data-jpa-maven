@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.jpa.repository.Query;
 
 @Entity
@@ -24,6 +31,7 @@ import org.springframework.data.jpa.repository.Query;
 	@NamedQuery(name="Book.queryJpqlNamedParam",query="select b from Book b where b.title = :title")
 
 })*/
+@EntityListeners(AuditingEntityListener.class)
 public class Book {
 	
 	@Id
@@ -46,6 +54,18 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name="AUTHOR_ID")
 	private Author author;
+	
+	@CreatedBy
+	private String createdBy;
+	
+	@LastModifiedBy
+	private String lastModifiedBy;
+	
+	@CreatedDate
+	private Date createdDate;
+	
+	@LastModifiedDate
+	private Date lastModifiedDate;
 	
 	public Book() {
 
@@ -140,11 +160,46 @@ public class Book {
 		this.author = author;
 	}
 
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getLastModifiedBy() {
+		return lastModifiedBy;
+	}
+
+	public void setLastModifiedBy(String lastModifiedBy) {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", title=" + title + ", publishDate=" + publishDate + ", pageCount="
-				+ pageCount + ", price=" + price + ", version=" + version + ", author=" + author + "]";
-	}	
+				+ pageCount + ", price=" + price + ", version=" + version + ", author=" + author + ", createdBy="
+				+ createdBy + ", lastModifiedBy=" + lastModifiedBy + ", createdDate=" + createdDate
+				+ ", lastModifiedDate=" + lastModifiedDate + "]";
+	}
+	
 	
 
 }

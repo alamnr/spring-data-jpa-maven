@@ -19,9 +19,10 @@ import com.spring.data.jpa.config.DataConfig;
 import com.spring.data.jpa.config.PersistenceContext;
 import com.spring.data.jpa.model.Book;
 import com.spring.data.jpa.repository.BookRepository;
-import com.spring.data.jpa.repository.CustomRepository;
-import com.spring.data.jpa.repository.ReadOnlyRepository;
-import com.spring.data.jpa.repository.BookReadOnlyRepository;
+import com.spring.data.jpa.repository.custom.BaseRepositoryExample;
+import com.spring.data.jpa.repository.custom.BookReadOnlyRepository;
+import com.spring.data.jpa.repository.custom.CustomRepository;
+import com.spring.data.jpa.repository.custom.ReadOnlyRepository;
 import com.spring.data.jpa.service.BookService;
 import com.spring.data.jpa.util.BookUtil;
 
@@ -44,7 +45,8 @@ public class Application {
 		 * System.out.println(bookService.findAll());
 		 */
 
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("PersistenceContext.xml");
+		//ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("PersistenceContext.xml");
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DataConfig.class);
 		BookRepository bookRepository = context.getBean(BookRepository.class);
 
 		List<Book> books = BookUtil.create(7);
@@ -133,11 +135,18 @@ public class Application {
 		/*bookRepository.findAll(new Sort(Sort.Direction.DESC, "price").and(new Sort(Sort.Direction.ASC, "title")))
 				.stream().forEach(obj -> System.out.println(obj));*/
 		
-		CustomRepository customRepository = context.getBean(CustomRepository.class);
+		/*CustomRepository customRepository = context.getBean(CustomRepository.class);
 		
 		customRepository.saveAndLog(BookUtil.create());
 		
-		System.out.println(customRepository.findAll().size());
+		System.out.println(customRepository.findAll().size());*/
+		
+		/*BaseRepositoryExample baseRepositoryExample  = context.getBean(BaseRepositoryExample.class);
+		baseRepositoryExample.findByIds(2L,7L).stream().forEach(obj->System.out.println(obj));*/
+		bookRepository.findAll().stream().forEach(obj->System.out.println(obj));
+		BookService service = context.getBean(BookService.class);
+		System.out.println(service.updateTitleOfBook(1L));
+		
 	}
 
 }

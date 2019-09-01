@@ -1,4 +1,4 @@
-package com.spring.data.jpa.repository;
+package com.spring.data.jpa.repository.custom;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
