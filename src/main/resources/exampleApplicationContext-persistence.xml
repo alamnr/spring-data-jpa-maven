@@ -47,4 +47,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     
+    <bean id="customAuditorAware" class="com.spring.data.jpa.auditing.CustomAuditorAware"/>
+	<jpa:auditing auditor-aware-ref="customAuditorAware"/>
+    
 </beans>

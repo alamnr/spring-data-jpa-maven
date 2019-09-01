@@ -1,12 +1,16 @@
 package com.spring.data.jpa.config;
 
 import com.jolbox.bonecp.BoneCPDataSource;
+import com.spring.data.jpa.auditing.CustomAuditorAware;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -25,6 +29,7 @@ import java.util.Properties;
 //@ComponentScan(basePackages= {"com.spring.data.jpa"})
 @EnableJpaRepositories(basePackages = "com.spring.data.jpa.repository")
 @PropertySource("classpath:application.properties")
+@EnableJpaAuditing
 public class PersistenceContext {
 
     protected static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
@@ -83,4 +88,10 @@ public class PersistenceContext {
 
         return entityManagerFactoryBean;
     }
+    
+    @Bean
+	public AuditorAware<?>  auditorAware()
+	{
+		return new CustomAuditorAware();
+	}
 }
