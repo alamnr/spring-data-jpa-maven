@@ -18,8 +18,10 @@
 
 	<properties>
 		<bonecp.version>0.7.1.RELEASE</bonecp.version>
+
 		<h2.version>2.2.220</h2.version>
 		<hibernate.version>5.4.24.Final</hibernate.version>
+
 
 		<slf4j.version>1.7.5</slf4j.version>
 		<spring.version>5.2.20.RELEASE</spring.version>
